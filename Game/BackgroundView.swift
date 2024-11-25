@@ -7,7 +7,7 @@ struct BackgroundView: View{
             Color("BackgroundColor").ignoresSafeArea()
             VStack {
                 HStack {
-                    Button(action: {}){RoundedImageView(name: "arrow.clockwise")
+                    Button(action: {print("TODO RESTART GAME")}){RoundedImageView(name: "arrow.clockwise")
                     }
                     Spacer()
                     RoundedImageView(name: "list.dash")
