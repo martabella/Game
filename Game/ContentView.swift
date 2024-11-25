@@ -14,17 +14,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .tracking(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                Slider(value: $sliderValue, in: 1...100, step: 1){
-                    Text("Value")
-                } minimumValueLabel: {
-                    Text("1")
-                        .font(.headline)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                } maximumValueLabel: {
-                    Text("100")
-                        .font(.headline)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                }
+                SliderView(value: $sliderValue)
                 Text("\(sliderValue)")
                 Button("TRY") {
                     self.alerIsVisible=true
@@ -38,8 +28,8 @@ struct ContentView: View {
                     ))
                 .cornerRadius(21)
                 .alert(isPresented: $alerIsVisible){
-                    Alert(title: Text("Hello"),
-                          message: Text("This is my first alert"),
+                    Alert(title: Text("Congratulations"),
+                          message: Text("The slider value \(Int(sliderValue))"),
                           dismissButton: .default(Text("Got it")){
                         
                                 print("Alert is closed")
@@ -58,4 +48,23 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+struct SliderView: View {
+    
+    @Binding var value:Double
+    
+    var body: some View {
+        Slider(value: $value, in: 1...100, step: 1){
+            Text("Value")
+        } minimumValueLabel: {
+            Text("1")
+                .font(.headline)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+        } maximumValueLabel: {
+            Text("100")
+                .font(.headline)
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+        }
+    }
 }
