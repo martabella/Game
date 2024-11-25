@@ -4,19 +4,23 @@ struct ContentView: View {
     
     @State var alerIsVisible = false
     @State var sliderValue:Double = 50
+    
+    @State var game = Game()
+    
     var body: some View {
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
             VStack(spacing: 20){
                 Text("🎯🎯🎯🎯🎯")
                     .font(.largeTitle)
-                Text("89")
+                Text("\(game.target)")
                     .font(.largeTitle)
                     .tracking(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 SliderView(value: $sliderValue)
                 Text("\(sliderValue)")
                 Button("TRY") {
+                    game.points(sliderValue: Int(sliderValue))
                     self.alerIsVisible=true
                 }
                 .padding(.all)
@@ -29,10 +33,10 @@ struct ContentView: View {
                 .cornerRadius(21)
                 .alert(isPresented: $alerIsVisible){
                     Alert(title: Text("Congratulations"),
-                          message: Text("The slider value \(Int(sliderValue))"),
+                          message: Text("🎉🎉🎉🎉 \n Your points are \(game.points) \n The slider value is \(Int(sliderValue))"),
                           dismissButton: .default(Text("Got it")){
-                        
-                                print("Alert is closed")
+                                game.restart()
+                        self.sliderValue = 50
                     })
                 }
                 
