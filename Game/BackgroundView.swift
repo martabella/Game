@@ -1,20 +1,22 @@
 import SwiftUI
 
 struct BackgroundView: View{
+    let game:Game
     var body: some View{
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
             VStack {
                 HStack {
-                    RoundedImageView(name: "arrow.clockwise")
+                    Button(action: {}){RoundedImageView(name: "arrow.clockwise")
+                    }
                     Spacer()
                     RoundedImageView(name: "list.dash")
                 }
                 Spacer()
                 HStack {
-                    NumberView(text: "SCORE", value: 0)
+                    NumberView(text: "SCORE", value: game.score)
                     Spacer()
-                    NumberView(text: "ROUND", value: 10)
+                    NumberView(text: "ROUND", value: 0)
                 }
                 
                 
@@ -49,5 +51,5 @@ struct NumberView : View {
 
 
 #Preview {
-    BackgroundView()
+    BackgroundView(game: Game())
 }

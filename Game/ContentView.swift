@@ -9,7 +9,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            BackgroundView()
+            BackgroundView(game: game)
             VStack(spacing: 20){
                 Text("🎯🎯🎯🎯🎯")
                     .font(.largeTitle)
@@ -18,7 +18,7 @@ struct ContentView: View {
                     .tracking(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 SliderView(value: $sliderValue)
-                Text("\(sliderValue)")
+                Text("Score \(game.score)")
                 Button("TRY") {
                     game.points(sliderValue: Int(sliderValue))
                     self.alerIsVisible=true
