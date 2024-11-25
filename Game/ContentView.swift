@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var alerIsVisible = false
+    @State var sliderValue:Double = 50
     var body: some View {
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
@@ -12,7 +14,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .tracking(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                Slider(value: .constant(50), in: 1...100, step: 1){
+                Slider(value: $sliderValue, in: 1...100, step: 1){
                     Text("Value")
                 } minimumValueLabel: {
                     Text("1")
@@ -23,8 +25,9 @@ struct ContentView: View {
                         .font(.headline)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 }
+                Text("\(sliderValue)")
                 Button("TRY") {
-                    print("try button tapped")
+                    self.alerIsVisible=true
                 }
                 .padding(.all)
                 .font(.title3)
@@ -34,6 +37,15 @@ struct ContentView: View {
                     endPoint: .trailing
                     ))
                 .cornerRadius(21)
+                .alert(isPresented: $alerIsVisible){
+                    Alert(title: Text("Hello"),
+                          message: Text("This is my first alert"),
+                          dismissButton: .default(Text("Got it")){
+                        
+                                print("Alert is closed")
+                    })
+                }
+                
                 
                 
                 
