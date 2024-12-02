@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BackgroundView: View{
     @Binding var game:Game
+    @State var isMarksPresented = false
     var body: some View{
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
@@ -12,7 +13,11 @@ struct BackgroundView: View{
                         RoundedImageView(name: "arrow.clockwise")
                     }
                     Spacer()
-                    RoundedImageView(name: "list.dash")
+                    Button(action: {isMarksPresented=true}){
+                        RoundedImageView(name: "list.dash")}
+                    .sheet(isPresented: $isMarksPresented){
+                        MarksView(game: game)
+                    }
                 }
                 Spacer()
                 HStack {
