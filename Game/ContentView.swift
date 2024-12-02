@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var alerIsVisible = false
-    @State var sliderValue:Double = 50
+    @State var sliderValue:Double = 53
     
     @State var game = Game()
     
@@ -36,7 +36,7 @@ struct ContentView: View {
                           message: Text("🎉🎉🎉🎉 \n Your points are \(game.points) \n The slider value is \(Int(sliderValue))"),
                           dismissButton: .default(Text("Got it")){
                                 game.restart()
-                        self.sliderValue = 50
+                        self.sliderValue = 53
                     })
                 }
                 
