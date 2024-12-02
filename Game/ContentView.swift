@@ -9,7 +9,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            BackgroundView(game: game)
+            BackgroundView(game: $game)
             VStack(spacing: 20){
                 Text("🎯🎯🎯🎯🎯")
                     .font(.largeTitle)
