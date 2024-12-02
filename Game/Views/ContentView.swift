@@ -2,25 +2,24 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var gameStore: GameStore
+    
     @State var alerIsVisible = false
     @State var sliderValue:Double = 53
     
-    @State var game = Game()
-    
     var body: some View {
         ZStack {
-            BackgroundView(game: $game)
+            BackgroundView()
             VStack(spacing: 20){
                 Text("🎯🎯🎯🎯🎯")
                     .font(.largeTitle)
-                Text("\(game.target)")
+                Text("\(gameStore.game.target)")
                     .font(.largeTitle)
                     .tracking(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 SliderView(value: $sliderValue)
-                Text("Score \(game.score)")
                 Button("TRY") {
-                    game.points(sliderValue: Int(sliderValue))
+                    gameStore.game.points(sliderValue: Int(sliderValue))
                     self.alerIsVisible=true
                 }
                 .padding(.all)
@@ -33,9 +32,9 @@ struct ContentView: View {
                 .cornerRadius(21)
                 .alert(isPresented: $alerIsVisible){
                     Alert(title: Text("Congratulations"),
-                          message: Text("🎉🎉🎉🎉 \n Your points are \(game.points) \n The slider value is \(Int(sliderValue))"),
+                          message: Text("🎉🎉🎉🎉 \n Your points are \(gameStore.game.points) \n The slider value is \(Int(sliderValue))"),
                           dismissButton: .default(Text("Got it")){
-                                game.restart()
+                        gameStore.game.restart()
                         self.sliderValue = 53
                     })
                 }
@@ -51,7 +50,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView().environmentObject(GameStore())
 }
 
 struct SliderView: View {

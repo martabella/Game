@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct MarksView: View {
-    let game:Game
+    
+    @EnvironmentObject var gameStore: GameStore
+    
     var body: some View {
         ZStack {
             Color("BackgroundColor").ignoresSafeArea()
             VStack {
                 Text("MARKS").font(.largeTitle)
-                List(game.marks, id:\.date){mark in
+                List(gameStore.game.marks, id:\.date){mark in
                     HStack {
                         Text("\(mark.value)")
                         Text("\(mark.date)")
@@ -19,5 +21,5 @@ struct MarksView: View {
 }
 
 #Preview {
-    MarksView(game: Game())
+    MarksView().environmentObject(GameStore())
 }

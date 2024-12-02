@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct BackgroundView: View{
-    @Binding var game:Game
+    @EnvironmentObject var gameStore: GameStore
+    
     @State var isMarksPresented = false
     var body: some View{
         ZStack {
@@ -9,21 +10,21 @@ struct BackgroundView: View{
             
             VStack {
                 HStack {
-                    Button(action: {game.restartGame()}){
+                    Button(action: {gameStore.game.restartGame()}){
                         RoundedImageView(name: "arrow.clockwise")
                     }
                     Spacer()
                     Button(action: {isMarksPresented=true}){
                         RoundedImageView(name: "list.dash")}
                     .sheet(isPresented: $isMarksPresented){
-                        MarksView(game: game)
+                        MarksView()
                     }
                 }
                 Spacer()
                 HStack {
-                    NumberView(text: "SCORE", value: game.score)
+                    NumberView(text: "SCORE", value: gameStore.game.score)
                     Spacer()
-                    NumberView(text: "ROUND", value: game.rounds)
+                    NumberView(text: "ROUND", value: gameStore.game.rounds)
                 }
                 
                 
@@ -61,5 +62,5 @@ struct NumberView : View {
 
 
 #Preview {
-    BackgroundView(game: .constant(Game()))
+    BackgroundView().environmentObject(GameStore())
 }
